@@ -1562,6 +1562,12 @@ function logout() {
 }
 
 function showPage(pageName) {
+
+    if (pageName=='configuracion'){
+
+           window.location.href = 'portal-completo.html'
+        return;
+    }
     // Ocultar todas las páginas de contenido
     const pages = document.querySelectorAll('.page-content');
     pages.forEach(page => page.classList.add('hidden'));
