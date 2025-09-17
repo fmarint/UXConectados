@@ -709,7 +709,7 @@
             </a>
             
             <div class="menu-section">Sistema</div>
-            <a href="#" class="menu-item" onclick="showPage('configuracion')">
+            <a href="portal.html" class="menu-item" >
                 <i class="fas fa-cog"></i>
                 Configuración
             </a>
@@ -1562,12 +1562,6 @@ function logout() {
 }
 
 function showPage(pageName) {
-
-    if (pageName=='configuracion'){
-
-           window.location.href = 'portal-completo.html'
-        return;
-    }
     // Ocultar todas las páginas de contenido
     const pages = document.querySelectorAll('.page-content');
     pages.forEach(page => page.classList.add('hidden'));
