@@ -1,0 +1,1962 @@
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Corporativo - Comunicados y Noticias</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        .login-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .login-subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+        }
+
+        .portal {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo i {
+            font-size: 32px;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            opacity: 0.8;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .hero-section {
+            margin-bottom: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px;
+        }
+
+        .slide-content h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .slide-content p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: white;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-categories {
+            margin-bottom: 40px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .category-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .category-count {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .filters-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group label {
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .filter-select, .filter-input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid #667eea;
+            background: transparent;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .publications-section {
+            margin-bottom: 50px;
+        }
+
+        .publications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .publication-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .publication-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-badges {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-category { background: rgba(102, 126, 234, 0.9); }
+        .badge-important { background: rgba(220, 53, 69, 0.9); }
+        .badge-pinned { background: rgba(255, 193, 7, 0.9); }
+        .badge-unread { background: rgba(40, 167, 69, 0.9); }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .card-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-author {
+            font-weight: 500;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .card-description {
+            color: #6c757d;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .card-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-read-more {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-read-more:hover {
+            transform: translateY(-2px);
+        }
+
+        .like-btn {
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            padding: 5px;
+        }
+
+        .like-btn:hover, .like-btn.liked {
+            color: #dc3545;
+        }
+
+        .publication-detail {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .detail-header {
+            position: relative;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .detail-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+        }
+
+        .detail-title-section {
+            color: white;
+        }
+
+        .detail-badges {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .detail-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .detail-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            opacity: 0.9;
+            flex-wrap: wrap;
+        }
+
+        .detail-content {
+            padding: 40px;
+        }
+
+        .detail-description {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 30px;
+            white-space: pre-line;
+        }
+
+        .detail-attachments {
+            margin-bottom: 30px;
+        }
+
+        .attachment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .attachment-item {
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .attachment-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+
+        .attachment-name {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .attachment-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .detail-tags {
+            margin-bottom: 30px;
+        }
+
+        .tags-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: #f8f9fa;
+            color: #495057;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .detail-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-like {
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+
+        .btn-like:hover, .btn-like.active {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-dislike {
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+
+        .btn-dislike:hover, .btn-dislike.active {
+            background: #6c757d;
+            color: white;
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stars {
+            display: flex;
+            gap: 5px;
+        }
+
+        .star {
+            font-size: 20px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .star:hover, .star.active {
+            color: #ffc107;
+        }
+
+        .comments-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .comments-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .comment-form {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .comment-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .comment-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-comment {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-comment.primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-comment.secondary {
+            background: #f8f9fa;
+            color: #6c757d;
+        }
+
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .comment-item {
+            padding: 20px;
+            border: 1px solid #f0f0f0;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .comment-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .comment-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comment-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .comment-info {
+            font-size: 14px;
+        }
+
+        .comment-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .comment-date {
+            color: #6c757d;
+            font-size: 12px;
+        }
+
+        .comment-text {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .header-nav {
+                gap: 20px;
+            }
+
+            .main-container {
+                padding: 20px 15px;
+            }
+
+            .hero-section {
+                height: 200px;
+            }
+
+            .slide-content h2 {
+                font-size: 24px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .publications-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .detail-title {
+                font-size: 24px;
+            }
+
+            .detail-content {
+                padding: 20px;
+            }
+
+            .detail-actions {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .detail-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .action-buttons {
+                justify-content: center;
+            }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            z-index: 10000;
+            min-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .notification.success { background: #28a745; }
+        .notification.error { background: #dc3545; }
+        .notification.warning { background: #ffc107; color: #212529; }
+        .notification.info { background: #17a2b8; }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginPage">
+        <div class="login-box">
+            <div class="login-logo">
+                <i class="fas fa-newspaper"></i>
+            </div>
+            <h1 class="login-title">Portal Corporativo</h1>
+            <p class="login-subtitle">Comunicados y Noticias Empresariales</p>
+            
+            <form onsubmit="login(event)">
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" class="form-control" placeholder="usuario@empresa.com" value="admin@empresa.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" value="123456" required>
+                </div>
+                
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+                </button>
+            </form>
+            
+            <p style="margin-top: 20px; font-size: 12px; color: #999;">
+                Credenciales de prueba: admin@empresa.com / 123456
+            </p>
+        </div>
+    </div>
+
+    <div class="portal" id="portalPage">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Portal Corporativo</span>
+                </div>
+                
+                <nav class="header-nav">
+                    <a href="#" class="nav-link active" onclick="showSection('home')">Inicio</a>
+                    <a href="#" class="nav-link" onclick="showSection('categories')">Categorías</a>
+                    <a href="#" class="nav-link" onclick="showSection('favorites')">Favoritos</a>
+                </nav>
+                
+                <div class="user-info" onclick="logout()">
+                    <div class="user-avatar">JP</div>
+                    <div>
+                        <div style="font-weight: 600;">Juan Pérez</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Empleado</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-container">
+            <div id="home-section" class="section">
+                <div class="hero-section">
+                    <div class="slider">
+                        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1560472355-536de3962603?w=1200&h=400&fit=crop');">
+                            <div class="slide-overlay"></div>
+                            <div class="slide-content">
+                                <h2>🎉 Nuevas Políticas de Trabajo Remoto</h2>
+                                <p>Conoce las últimas actualizaciones sobre teletrabajo y flexibilidad laboral</p>
+                            </div>
+                        </div>
+                        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=400&fit=crop');">
+                            <div class="slide-overlay"></div>
+                            <div class="slide-content">
+                                <h2>📊 Resultados Q3 2024</h2>
+                                <p>Excelentes resultados financieros del tercer trimestre</p>
+                            </div>
+                        </div>
+                        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1577495508048-b635879837f1?w=1200&h=400&fit=crop');">
+                            <div class="slide-overlay"></div>
+                            <div class="slide-content">
+                                <h2>🎄 Evento de Fin de Año</h2>
+                                <p>¡Únete a nuestra celebración navideña el 15 de diciembre!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <span class="slider-dot active" onclick="currentSlide(1)"></span>
+                        <span class="slider-dot" onclick="currentSlide(2)"></span>
+                        <span class="slider-dot" onclick="currentSlide(3)"></span>
+                    </div>
+                </div>
+
+                <div class="top-categories">
+                    <h2 class="section-title">
+                        <i class="fas fa-star"></i>
+                        Categorías Principales
+                    </h2>
+                    <div class="categories-grid">
+                        <div class="category-card" onclick="filterByCategory('noticias')" style="border-left-color: #007bff;">
+                            <div class="category-icon" style="background: #007bff;">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <div class="category-name">Noticias</div>
+                            <div class="category-count">24 publicaciones</div>
+                        </div>
+                        
+                        <div class="category-card" onclick="filterByCategory('eventos')" style="border-left-color: #28a745;">
+                            <div class="category-icon" style="background: #28a745;">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="category-name">Eventos</div>
+                            <div class="category-count">12 publicaciones</div>
+                        </div>
+                        
+                        <div class="category-card" onclick="filterByCategory('politicas')" style="border-left-color: #ffc107;">
+                            <div class="category-icon" style="background: #ffc107;">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div class="category-name">Políticas</div>
+                            <div class="category-count">8 publicaciones</div>
+                        </div>
+                        
+                        <div class="category-card" onclick="filterByCategory('recursos')" style="border-left-color: #17a2b8;">
+                            <div class="category-icon" style="background: #17a2b8;">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="category-name">Recursos Humanos</div>
+                            <div class="category-count">15 publicaciones</div>
+                        </div>
+                        
+                        <div class="category-card" onclick="filterByCategory('tecnologia')" style="border-left-color: #6f42c1;">
+                            <div class="category-icon" style="background: #6f42c1;">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="category-name">Tecnología</div>
+                            <div class="category-count">6 publicaciones</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filters-section">
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label>Categoría</label>
+                            <select class="filter-select" id="categoryFilter" onchange="applyFilters()">
+                                <option value="">Todas las categorías</option>
+                                <option value="noticias">Noticias</option>
+                                <option value="eventos">Eventos</option>
+                                <option value="politicas">Políticas</option>
+                                <option value="recursos">Recursos Humanos</option>
+                                <option value="tecnologia">Tecnología</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Estado de Lectura</label>
+                            <div class="filter-buttons">
+                                <button class="filter-btn active" onclick="toggleFilter(this, 'all')">Todas</button>
+                                <button class="filter-btn" onclick="toggleFilter(this, 'unread')">No Leídas</button>
+                                <button class="filter-btn" onclick="toggleFilter(this, 'read')">Leídas</button>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Tipo</label>
+                            <div class="filter-buttons">
+                                <button class="filter-btn active" onclick="toggleFilter(this, 'all-type')">Todas</button>
+                                <button class="filter-btn" onclick="toggleFilter(this, 'pinned')">Fijadas</button>
+                                <button class="filter-btn" onclick="toggleFilter(this, 'important')">Importantes</button>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Buscar</label>
+                            <input type="text" class="filter-input" placeholder="Buscar publicaciones..." onkeyup="searchPublications(this.value)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="publications-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-clock"></i>
+                        Últimas Publicaciones
+                    </h2>
+                    <div class="publications-grid" id="latestPublications"></div>
+                </div>
+
+                <div class="publications-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Comunicados Importantes
+                    </h2>
+                    <div class="publications-grid" id="importantPublications"></div>
+                </div>
+
+                <div class="publications-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-envelope"></i>
+                        No Leídos
+                    </h2>
+                    <div class="publications-grid" id="unreadPublications"></div>
+                </div>
+            </div>
+
+            <div id="detail-section" class="section hidden">
+                <div class="publication-detail">
+                    <div class="detail-header" id="detailHeader">
+                        <div class="detail-overlay">
+                            <div class="detail-title-section">
+                                <div class="detail-badges" id="detailBadges"></div>
+                                <h1 class="detail-title" id="detailTitle"></h1>
+                                <div class="detail-meta">
+                                    <span id="detailAuthor"></span>
+                                    <span id="detailDate"></span>
+                                    <span id="detailViews"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-content">
+                        <div class="detail-description" id="detailDescription"></div>
+
+                        <div class="detail-attachments" id="detailAttachments">
+                            <h3><i class="fas fa-paperclip"></i> Archivos Adjuntos</h3>
+                            <div class="attachment-grid" id="attachmentGrid"></div>
+                        </div>
+
+                        <div class="detail-tags" id="detailTagsSection">
+                            <h3><i class="fas fa-tags"></i> Etiquetas</h3>
+                            <div class="tags-list" id="detailTags"></div>
+                        </div>
+                    </div>
+
+                    <div class="detail-actions">
+                        <div class="action-buttons">
+                            <button class="action-btn btn-like" onclick="toggleLike()">
+                                <i class="fas fa-heart"></i>
+                                <span id="likeText">Me gusta</span>
+                                <span id="likeCount">(0)</span>
+                            </button>
+                            <button class="action-btn btn-dislike" onclick="toggleDislike()">
+                                <i class="fas fa-thumbs-down"></i>
+                                <span>No me gusta</span>
+                            </button>
+                        </div>
+
+                        <div class="rating-section">
+                            <span>Calificar:</span>
+                            <div class="stars">
+                                <i class="fas fa-star star" data-rating="1" onclick="setRating(1)"></i>
+                                <i class="fas fa-star star" data-rating="2" onclick="setRating(2)"></i>
+                                <i class="fas fa-star star" data-rating="3" onclick="setRating(3)"></i>
+                                <i class="fas fa-star star" data-rating="4" onclick="setRating(4)"></i>
+                                <i class="fas fa-star star" data-rating="5" onclick="setRating(5)"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comments-section">
+                    <div class="comments-header">
+                        <h3><i class="fas fa-comments"></i> Comentarios (<span id="commentsCount">0</span>)</h3>
+                        <button class="btn-comment secondary" onclick="showSection('home')">
+                            <i class="fas fa-arrow-left"></i> Volver
+                        </button>
+                    </div>
+
+                    <div class="comment-form">
+                        <textarea class="comment-input" placeholder="Escribe tu comentario..." id="commentText"></textarea>
+                        <div class="comment-actions">
+                            <button class="btn-comment secondary" onclick="clearComment()">Cancelar</button>
+                            <button class="btn-comment primary" onclick="submitComment()">
+                                <i class="fas fa-paper-plane"></i> Comentar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="comments-list" id="commentsList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-overlay hidden" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        let currentPublication = null;
+        let currentFilters = {
+            category: '',
+            readStatus: 'all',
+            type: 'all-type',
+            search: ''
+        };
+
+        const publicationsData = [
+            {
+                id: 1,
+                title: "Nueva Política de Teletrabajo 2024",
+                description: "Actualización completa de las normativas de trabajo remoto para mejorar la flexibilidad laboral y el equilibrio vida-trabajo. Incluye nuevos horarios flexibles y beneficios adicionales.",
+                content: "Estimados colaboradores,\n\nNos complace anunciar la actualización de nuestra política de teletrabajo, la cual entrará en vigor a partir del 1 de octubre de 2024. Esta nueva política refleja nuestro compromiso continuo con el bienestar de nuestros empleados y la flexibilidad laboral.\n\nPrincipales cambios:\n\n1. Horarios Flexibles: Los empleados podrán elegir entre diferentes modalidades de horario, incluyendo horario tradicional, horario flexible y horario comprimido.\n\n2. Días de Teletrabajo: Se aumenta de 2 a 3 días por semana la posibilidad de trabajar desde casa, con previa coordinación con el supervisor directo.\n\n3. Espacios de Trabajo: La empresa proporcionará un subsidio mensual para el acondicionamiento del espacio de trabajo en casa.\n\n4. Tecnología: Todos los empleados en modalidad de teletrabajo recibirán equipamiento tecnológico actualizado, incluyendo laptop, monitor adicional y silla ergonómica.\n\n5. Evaluación de Desempeño: Se implementará un nuevo sistema de evaluación basado en objetivos y resultados, en lugar de horas trabajadas.\n\nEsta política busca mantener la productividad mientras mejoramos la calidad de vida de nuestro equipo. Agradecemos su comprensión y colaboración en la implementación de estos cambios.",
+                category: "politicas",
+                categoryName: "Políticas",
+                categoryColor: "#ffc107",
+                author: "María García",
+                authorRole: "Directora de RRHH",
+                date: "2024-09-16",
+                image: "https://images.unsplash.com/photo-1560472355-536de3962603?w=800&h=400&fit=crop",
+                attachments: [
+                    { 
+                        type: "pdf", 
+                        url: "#", 
+                        name: "Política_Teletrabajo_2024.pdf",
+                        description: "Documento completo de la nueva política"
+                    },
+                    { 
+                        type: "video", 
+                        url: "#", 
+                        name: "Video_Explicativo_Teletrabajo.mp4",
+                        description: "Presentación de 15 minutos explicando los cambios"
+                    }
+                ],
+                tags: ["teletrabajo", "políticas", "flexibilidad", "RRHH", "2024"],
+                isImportant: true,
+                isPinned: true,
+                isRead: false,
+                likes: 34,
+                views: 256,
+                rating: 4.5,
+                comments: [
+                    {
+                        id: 1,
+                        author: "Carlos López",
+                        avatar: "CL",
+                        date: "2024-09-16 10:30",
+                        text: "Excelente iniciativa! Esto definitivamente mejorará nuestro equilibrio vida-trabajo. ¿Cuándo estará disponible el formulario para solicitar el equipamiento?"
+                    },
+                    {
+                        id: 2,
+                        author: "Ana Martínez",
+                        avatar: "AM",
+                        date: "2024-09-16 11:15",
+                        text: "Me parece muy bien la propuesta. ¿El subsidio para el espacio de trabajo en casa será mensual o anual?"
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Resultados Financieros Q3 2024 - Récord Histórico",
+                description: "Excelentes resultados del tercer trimestre con un crecimiento del 18% respecto al año anterior, superando todas las proyecciones iniciales. Reconocimiento especial al equipo de ventas.",
+                content: "Estimado equipo,\n\nNos complace anunciar que los resultados del tercer trimestre de 2024 han superado ampliamente nuestras expectativas, estableciendo un nuevo récord histórico en la empresa.\n\nResultados destacados:\n\n• Ingresos totales: $15.2 millones (18% más que Q3 2023)\n• Margen de beneficio: 24% (aumento del 3% respecto al trimestre anterior)\n• Nuevos clientes adquiridos: 847 (meta: 650)\n• Retención de clientes: 94% (la más alta en 5 años)\n• Satisfacción del cliente: 4.7/5.0\n\nFactores clave del éxito:\n\n1. Lanzamiento exitoso de la nueva línea de productos\n2. Expansión a 3 nuevos mercados internacionales\n3. Implementación de tecnologías de automatización\n4. Excelente trabajo del equipo de ventas y marketing\n5. Mejoras en el servicio al cliente\n\nComo muestra de agradecimiento, todos los empleados recibirán un bono especial del 5% de su salario mensual.\n\n¡Felicitaciones a todos por este logro excepcional!",
+                category: "noticias",
+                categoryName: "Noticias",
+                categoryColor: "#007bff",
+                author: "Carlos López",
+                authorRole: "Director Financiero",
+                date: "2024-09-15",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
+                attachments: [
+                    { 
+                        type: "pdf", 
+                        url: "#", 
+                        name: "Reporte_Financiero_Q3_2024.pdf",
+                        description: "Reporte detallado con gráficos y análisis"
+                    }
+                ],
+                tags: ["finanzas", "resultados", "crecimiento", "Q3", "récord"],
+                isImportant: true,
+                isPinned: true,
+                isRead: true,
+                likes: 52,
+                views: 189,
+                rating: 4.8,
+                comments: [
+                    {
+                        id: 1,
+                        author: "Elena Rodríguez",
+                        avatar: "ER",
+                        date: "2024-09-15 09:45",
+                        text: "¡Increíbles resultados! Es emocionante ver cómo hemos crecido este año. ¡Felicitaciones a todo el equipo!"
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Fiesta de Fin de Año 2024 - ¡Celebremos Juntos!",
+                description: "Celebración navideña de la empresa el 15 de diciembre en el Hotel Grand Plaza. Inscripciones abiertas hasta el 30 de noviembre. Incluye cena, show en vivo y regalos para toda la familia.",
+                content: "¡Es hora de celebrar!\n\nLos invitamos cordialmente a nuestra tradicional Fiesta de Fin de Año 2024, donde celebraremos los logros de este exitoso año y compartiremos momentos especiales en nuestra gran familia empresarial.\n\nDetalles del evento:\n\n📅 Fecha: Sábado 15 de diciembre de 2024\n🕖 Hora: 7:00 PM - 2:00 AM\n📍 Lugar: Salón Principal del Hotel Grand Plaza\n👔 Dress Code: Elegante / Cocktail\n\nProgramación:\n\n7:00 PM - Bienvenida y cocktail\n8:00 PM - Cena de gala (menú de 4 tiempos)\n9:30 PM - Palabras del CEO y reconocimientos\n10:00 PM - Show en vivo: Banda 'Los Clásicos'\n11:30 PM - Baile y música DJ\n12:00 AM - Brindis de Año Nuevo\n1:00 AM - Rifas y sorpresas\n\n¡Los esperamos para cerrar este año exitoso con una gran celebración!",
+                category: "eventos",
+                categoryName: "Eventos",
+                categoryColor: "#28a745",
+                author: "Ana Martínez",
+                authorRole: "Coordinadora de Eventos",
+                date: "2024-09-14",
+                image: "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=800&h=400&fit=crop",
+                attachments: [
+                    { 
+                        type: "image", 
+                        url: "https://images.unsplash.com/photo-1577495508048-b635879837f1?w=600&h=400&fit=crop", 
+                        name: "Invitación_Evento.jpg",
+                        description: "Invitación oficial del evento"
+                    }
+                ],
+                tags: ["evento", "navidad", "celebración", "fiesta", "familia"],
+                isImportant: false,
+                isPinned: false,
+                isRead: false,
+                likes: 78,
+                views: 334,
+                rating: 4.9,
+                comments: [
+                    {
+                        id: 1,
+                        author: "Pedro González",
+                        avatar: "PG",
+                        date: "2024-09-14 15:20",
+                        text: "¡Qué emocionante! Ya tengo la fecha marcada en mi calendario. ¿El transporte desde la oficina tendrá costo adicional?"
+                    }
+                ]
+            },
+            {
+                id: 4,
+                title: "Mantenimiento Programado - Sistema IT Weekend",
+                description: "Actualización mayor del sistema informático el fin de semana del 21-22 de septiembre. Algunos servicios estarán temporalmente no disponibles. Preparación para nueva infraestructura cloud.",
+                content: "Estimados usuarios,\n\nEl Departamento de Tecnología de la Información realizará una actualización mayor de nuestros sistemas durante el fin de semana del 21-22 de septiembre de 2024.\n\nServicios afectados:\n❌ Correo electrónico corporativo\n❌ Sistema ERP\n❌ Portal interno de empleados\n❌ Aplicaciones de videoconferencia\n❌ Acceso remoto VPN\n\nServicios disponibles:\n✅ Teléfonos corporativos\n✅ Internet básico\n✅ Aplicaciones móviles externas\n\nRecomendaciones:\n• Descargar archivos importantes antes del viernes\n• Usar correos personales para comunicaciones urgentes\n• Planificar reuniones para después del domingo\n\nGracias por su comprensión y colaboración.",
+                category: "tecnologia",
+                categoryName: "Tecnología",
+                categoryColor: "#6f42c1",
+                author: "Roberto Sánchez",
+                authorRole: "Jefe de IT",
+                date: "2024-09-13",
+                image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop",
+                attachments: [
+                    { 
+                        type: "pdf", 
+                        url: "#", 
+                        name: "Cronograma_Mantenimiento.pdf",
+                        description: "Cronograma detallado del mantenimiento"
+                    }
+                ],
+                tags: ["IT", "mantenimiento", "sistema", "cloud", "actualización"],
+                isImportant: true,
+                isPinned: false,
+                isRead: false,
+                likes: 23,
+                views: 167,
+                rating: 4.2,
+                comments: []
+            },
+            {
+                id: 5,
+                title: "Nuevos Beneficios para Empleados 2025",
+                description: "Paquete mejorado de beneficios que entrará en vigor el próximo año fiscal. Incluye seguro médico ampliado, días adicionales de vacaciones, programa de bienestar y subsidios educativos.",
+                content: "Estimado equipo,\n\nNos emociona anunciar significativas mejoras en el paquete de beneficios para empleados, que entrarán en vigor el 1 de enero de 2025.\n\n🏥 SALUD Y BIENESTAR:\n• Seguro médico con cobertura familiar al 100%\n• Seguro dental y oftalmológico incluido\n• 2 días adicionales de salud mental al año\n• Programa de chequeos médicos anuales\n• Membresía gratuita en gimnasios afiliados\n\n🏖️ TIEMPO LIBRE:\n• 5 días adicionales de vacaciones anuales\n• 3 días personales flexibles\n• Permiso de paternidad extendido a 2 semanas\n• Horario flexible los viernes\n\n📚 DESARROLLO PROFESIONAL:\n• Subsidio educativo: hasta $3,000 anuales\n• 40 horas pagadas para capacitación\n• Acceso a plataformas de aprendizaje online\n• Programa de mentoring interno\n\n¡Gracias por ser parte de nuestra familia empresarial!",
+                category: "recursos",
+                categoryName: "Recursos Humanos",
+                categoryColor: "#17a2b8",
+                author: "Isabel Torres",
+                authorRole: "Gerente de Beneficios",
+                date: "2024-09-12",
+                image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&h=400&fit=crop",
+                attachments: [
+                    { 
+                        type: "pdf", 
+                        url: "#", 
+                        name: "Paquete_Beneficios_2025.pdf",
+                        description: "Documento completo de nuevos beneficios"
+                    }
+                ],
+                tags: ["beneficios", "RRHH", "bienestar", "salud", "educación", "2025"],
+                isImportant: true,
+                isPinned: false,
+                isRead: true,
+                likes: 89,
+                views: 445,
+                rating: 4.9,
+                comments: [
+                    {
+                        id: 1,
+                        author: "Mónica Herrera",
+                        avatar: "MH",
+                        date: "2024-09-12 09:45",
+                        text: "¡Excelentes noticias! Especialmente me gusta el programa de bienestar. ¿El subsidio educativo cubre cursos online también?"
+                    }
+                ]
+            }
+        ];
+
+        function login(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email && password) {
+                showLoading();
+                
+                setTimeout(() => {
+                    hideLoading();
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('portalPage').style.display = 'block';
+                    initializePortal();
+                    showNotification('¡Bienvenido al Portal Corporativo!', 'success');
+                }, 1500);
+            } else {
+                showNotification('Por favor complete todos los campos', 'error');
+            }
+        }
+
+        function logout() {
+            if (confirm('¿Está seguro que desea cerrar sesión?')) {
+                document.getElementById('loginPage').style.display = 'flex';
+                document.getElementById('portalPage').style.display = 'none';
+                showNotification('Sesión cerrada correctamente', 'info');
+            }
+        }
+
+        function showSection(sectionName) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.add('hidden'));
+            
+            document.getElementById(sectionName + '-section').classList.remove('hidden');
+            
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            if (sectionName === 'home') {
+                document.querySelector('[onclick="showSection(\'home\')"]').classList.add('active');
+            }
+        }
+
+        function currentSlide(n) {
+            showSlide(currentSlideIndex = n - 1);
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            
+            if (n >= slides.length) currentSlideIndex = 0;
+            if (n < 0) currentSlideIndex = slides.length - 1;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlideIndex += 1);
+        }
+
+        function initializeSlider() {
+            setInterval(nextSlide, 5000);
+        }
+
+        function filterByCategory(category) {
+            currentFilters.category = category;
+            document.getElementById('categoryFilter').value = category;
+            applyFilters();
+            showNotification(`Filtrando por categoría: ${category}`, 'info');
+        }
+
+        function toggleFilter(button, filterType) {
+            const siblings = button.parentNode.querySelectorAll('.filter-btn');
+            siblings.forEach(btn => btn.classList.remove('active'));
+            
+            button.classList.add('active');
+            
+            if (filterType.includes('all')) {
+                if (filterType === 'all') currentFilters.readStatus = 'all';
+                if (filterType === 'all-type') currentFilters.type = 'all-type';
+            } else {
+                if (['unread', 'read'].includes(filterType)) {
+                    currentFilters.readStatus = filterType;
+                } else {
+                    currentFilters.type = filterType;
+                }
+            }
+            
+            applyFilters();
+        }
+
+        function applyFilters() {
+            currentFilters.category = document.getElementById('categoryFilter').value;
+            renderPublications();
+        }
+
+        function searchPublications(query) {
+            currentFilters.search = query.toLowerCase();
+            applyFilters();
+        }
+
+        function renderPublications() {
+            const latestContainer = document.getElementById('latestPublications');
+            const importantContainer = document.getElementById('importantPublications');
+            const unreadContainer = document.getElementById('unreadPublications');
+            
+            let filteredPublications = publicationsData.filter(pub => {
+                let matches = true;
+                
+                if (currentFilters.category && pub.category !== currentFilters.category) {
+                    matches = false;
+                }
+                
+                if (currentFilters.readStatus === 'read' && !pub.isRead) {
+                    matches = false;
+                } else if (currentFilters.readStatus === 'unread' && pub.isRead) {
+                    matches = false;
+                }
+                
+                if (currentFilters.type === 'pinned' && !pub.isPinned) {
+                    matches = false;
+                } else if (currentFilters.type === 'important' && !pub.isImportant) {
+                    matches = false;
+                }
+                
+                if (currentFilters.search) {
+                    const searchText = (pub.title + ' ' + pub.description).toLowerCase();
+                    if (!searchText.includes(currentFilters.search)) {
+                        matches = false;
+                    }
+                }
+                
+                return matches;
+            });
+            
+            const latestPubs = filteredPublications.slice(0, 6);
+            const importantPubs = filteredPublications.filter(pub => pub.isImportant);
+            const unreadPubs = filteredPublications.filter(pub => !pub.isRead);
+            
+            latestContainer.innerHTML = latestPubs.map(pub => createPublicationCard(pub)).join('');
+            importantContainer.innerHTML = importantPubs.map(pub => createPublicationCard(pub)).join('');
+            unreadContainer.innerHTML = unreadPubs.map(pub => createPublicationCard(pub)).join('');
+        }
+
+        function createPublicationCard(publication) {
+            const badges = [];
+            
+            if (publication.isPinned) badges.push('<span class="badge badge-pinned">📌 Fijado</span>');
+            if (publication.isImportant) badges.push('<span class="badge badge-important">⚠️ Importante</span>');
+            if (!publication.isRead) badges.push('<span class="badge badge-unread">📧 No leído</span>');
+            badges.push(`<span class="badge badge-category">${publication.categoryName}</span>`);
+            
+            return `
+                <div class="publication-card" onclick="showPublicationDetail(${publication.id})">
+                    <div class="card-image" style="background-image: url('${publication.image}');">
+                        <div class="card-badges">
+                            ${badges.join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <div class="card-meta">
+                            <span class="card-date">
+                                <i class="fas fa-calendar"></i>
+                                ${formatDate(publication.date)}
+                            </span>
+                            <span class="card-author">${publication.author}</span>
+                        </div>
+                        
+                        <h3 class="card-title">${publication.title}</h3>
+                        <p class="card-description">${publication.description}</p>
+                        
+                        <div class="card-actions">
+                            <div class="card-stats">
+                                <span class="stat-item">
+                                    <i class="fas fa-eye"></i>
+                                    ${publication.views}
+                                </span>
+                                <span class="stat-item">
+                                    <i class="fas fa-heart"></i>
+                                    ${publication.likes}
+                                </span>
+                                <span class="stat-item">
+                                    <i class="fas fa-comments"></i>
+                                    ${publication.comments.length}
+                                </span>
+                            </div>
+                            
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <button class="like-btn ${publication.isLiked ? 'liked' : ''}" onclick="event.stopPropagation(); toggleCardLike(${publication.id})">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <button class="btn-read-more" onclick="event.stopPropagation(); showPublicationDetail(${publication.id})">
+                                    Leer más
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showPublicationDetail(publicationId) {
+            const publication = publicationsData.find(pub => pub.id === publicationId);
+            if (!publication) return;
+            
+            currentPublication = publication;
+            
+            publication.isRead = true;
+            publication.views++;
+            
+            document.getElementById('detailTitle').textContent = publication.title;
+            document.getElementById('detailAuthor').innerHTML = `<i class="fas fa-user"></i> ${publication.author} - ${publication.authorRole}`;
+            document.getElementById('detailDate').innerHTML = `<i class="fas fa-calendar"></i> ${formatDate(publication.date)}`;
+            document.getElementById('detailViews').innerHTML = `<i class="fas fa-eye"></i> ${publication.views} vistas`;
+            document.getElementById('detailDescription').textContent = publication.content;
+            
+            const detailHeader = document.getElementById('detailHeader');
+            detailHeader.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${publication.image}')`;
+            
+            const badges = [];
+            if (publication.isPinned) badges.push('<span class="badge badge-pinned">📌 Fijado</span>');
+            if (publication.isImportant) badges.push('<span class="badge badge-important">⚠️ Importante</span>');
+            badges.push(`<span class="badge badge-category">${publication.categoryName}</span>`);
+            document.getElementById('detailBadges').innerHTML = badges.join('');
+            
+            renderAttachments(publication.attachments);
+            
+            if (publication.tags && publication.tags.length > 0) {
+                document.getElementById('detailTags').innerHTML = publication.tags.map(tag => 
+                    `<span class="tag">#${tag}</span>`
+                ).join('');
+                document.getElementById('detailTagsSection').style.display = 'block';
+            } else {
+                document.getElementById('detailTagsSection').style.display = 'none';
+            }
+            
+            document.getElementById('likeCount').textContent = `(${publication.likes})`;
+            renderComments(publication.comments);
+            
+            showSection('detail');
+        }
+
+        function renderAttachments(attachments) {
+            const container = document.getElementById('attachmentGrid');
+            
+            if (!attachments || attachments.length === 0) {
+                document.getElementById('detailAttachments').style.display = 'none';
+                return;
+            }
+            
+            document.getElementById('detailAttachments').style.display = 'block';
+            
+            container.innerHTML = attachments.map(attachment => {
+                const iconMap = {
+                    'pdf': 'fa-file-pdf',
+                    'video': 'fa-video',
+                    'image': 'fa-image',
+                    'doc': 'fa-file-word'
+                };
+                
+                const colorMap = {
+                    'pdf': '#dc3545',
+                    'video': '#007bff',
+                    'image': '#28a745',
+                    'doc': '#007bff'
+                };
+                
+                return `
+                    <div class="attachment-item">
+                        <div class="attachment-icon">
+                            <i class="fas ${iconMap[attachment.type] || 'fa-file'}" style="color: ${colorMap[attachment.type] || '#6c757d'};"></i>
+                        </div>
+                        <div class="attachment-name">${attachment.name}</div>
+                        <p style="font-size: 12px; color: #6c757d; margin-bottom: 15px;">${attachment.description}</p>
+                        <button class="attachment-btn" onclick="downloadAttachment('${attachment.name}')">
+                            <i class="fas fa-download"></i> Descargar
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderComments(comments) {
+            const container = document.getElementById('commentsList');
+            const countElement = document.getElementById('commentsCount');
+            
+            countElement.textContent = comments.length;
+            
+            if (comments.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #6c757d; padding: 40px;">No hay comentarios aún. ¡Sé el primero en comentar!</p>';
+                return;
+            }
+            
+            container.innerHTML = comments.map(comment => `
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <div class="comment-author">
+                            <div class="comment-avatar">${comment.avatar}</div>
+                            <div class="comment-info">
+                                <div class="comment-name">${comment.author}</div>
+                                <div class="comment-date">${formatDateTime(comment.date)}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-text">${comment.text}</div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCardLike(publicationId) {
+            const publication = publicationsData.find(pub => pub.id === publicationId);
+            if (publication) {
+                publication.likes += publication.isLiked ? -1 : 1;
+                publication.isLiked = !publication.isLiked;
+                renderPublications();
+                showNotification(publication.isLiked ? '¡Te gusta esta publicación!' : 'Ya no te gusta esta publicación', 'info');
+            }
+        }
+
+        function toggleLike() {
+            if (!currentPublication) return;
+            
+            const likeBtn = document.querySelector('.btn-like');
+            const isLiked = likeBtn.classList.contains('active');
+            
+            if (isLiked) {
+                likeBtn.classList.remove('active');
+                currentPublication.likes--;
+                document.getElementById('likeText').textContent = 'Me gusta';
+                showNotification('Ya no te gusta esta publicación', 'info');
+            } else {
+                likeBtn.classList.add('active');
+                currentPublication.likes++;
+                document.getElementById('likeText').textContent = 'Te gusta';
+                showNotification('¡Te gusta esta publicación!', 'success');
+                
+                document.querySelector('.btn-dislike').classList.remove('active');
+            }
+            
+            document.getElementById('likeCount').textContent = `(${currentPublication.likes})`;
+        }
+
+        function toggleDislike() {
+            if (!currentPublication) return;
+            
+            const dislikeBtn = document.querySelector('.btn-dislike');
+            const likeBtn = document.querySelector('.btn-like');
+            
+            dislikeBtn.classList.toggle('active');
+            
+            if (dislikeBtn.classList.contains('active')) {
+                likeBtn.classList.remove('active');
+                document.getElementById('likeText').textContent = 'Me gusta';
+                showNotification('No te gusta esta publicación', 'warning');
+            }
+        }
+
+        function setRating(rating) {
+            const stars = document.querySelectorAll('.star');
+            
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+            
+            if (currentPublication) {
+                currentPublication.rating = rating;
+            }
+            
+            showNotification(`Has calificado con ${rating} estrella${rating > 1 ? 's' : ''}`, 'success');
+        }
+
+        function submitComment() {
+            const commentText = document.getElementById('commentText').value.trim();
+            
+            if (!commentText) {
+                showNotification('Por favor escribe un comentario', 'warning');
+                return;
+            }
+            
+            if (!currentPublication) return;
+            
+            const newComment = {
+                id: currentPublication.comments.length + 1,
+                author: "Juan Pérez",
+                avatar: "JP",
+                date: new Date().toISOString().slice(0, 16).replace('T', ' '),
+                text: commentText
+            };
+            
+            currentPublication.comments.unshift(newComment);
+            
+            document.getElementById('commentText').value = '';
+            
+            renderComments(currentPublication.comments);
+            
+            showNotification('Comentario agregado correctamente', 'success');
+        }
+
+        function clearComment() {
+            document.getElementById('commentText').value = '';
+        }
+
+        function downloadAttachment(filename) {
+            showNotification(`Descargando: ${filename}`, 'info');
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            if (diffDays === 1) return 'Ayer';
+            if (diffDays === 0) return 'Hoy';
+            if (diffDays <= 7) return `Hace ${diffDays} días`;
+            
+            return date.toLocaleDateString('es-ES', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        function formatDateTime(dateTimeString) {
+            const date = new Date(dateTimeString);
+            return date.toLocaleDateString('es-ES', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.add('hidden');
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            const icons = {
+                'success': 'check-circle',
+                'error': 'exclamation-triangle',
+                'warning': 'exclamation-circle',
+                'info': 'info-circle'
+            };
+            
+            notification.innerHTML = `
+                <i class="fas fa-${icons[type] || icons['info']}"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 4000);
+        }
+
+        function initializePortal() {
+            initializeSlider();
+            renderPublications();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailInput = document.getElementById('email');
+            if (emailInput) {
+                emailInput.focus();
+            }
+            
+            const commentInput = document.getElementById('commentText');
+            if (commentInput) {
+                commentInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' && e.ctrlKey) {
+                        submitComment();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
